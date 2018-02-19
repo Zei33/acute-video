@@ -49,7 +49,6 @@ There are many options available with the `acuteVideo()` function to customise t
 - [ ] Volume Controls
 - [ ] Source Controls
 - [ ] Subtitle Controls (WebVTT)
-- [ ] JS HTML Element Creation
 
 ## Long Term Objectives
 
