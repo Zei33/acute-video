@@ -42,7 +42,6 @@ function acuteVideo( target, options ){
 		"controlFadeTime" : 2000,							// Control fade time : time in milliseconds until the control bar fades.
 		"title" : "",											// Title : set a title for the video.
 		"subtitle" : "",										// Subtitle : set a subtitle for the video.
-		/*"barColor" : "rgba(255,255,255,0.25)",*/	// Bar color : set the control bar color.
 		"playheadColor" : "#f90",							// Playhead color : set the playhead color.
 		"barBlur" : false,									// Bar blur : add a guassian blur to the control bar background.
 		"controlColor" : "rgba(255,255,255,0.7)",		// Control color : set control button's color.
@@ -68,7 +67,6 @@ function acuteVideo( target, options ){
 	target.style.width = options.width;
 	target.style.height = options.height;
 	
-	//controlBar.style.backgroundColor = options.barColor;
 	controlBar.style.color = options.controlColor;
 	if (options.barBlur) controlBar.style.setProperty("backdrop-filter", "blur(2px)");
 	
