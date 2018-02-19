@@ -10,18 +10,7 @@
 	
 	<body>
 		
-		<div class="acute-video av container">
-			<div class="av controller">
-				<div class="av controller-offset"></div>
-				<div class="av scrubber">
-					<div class="av playback">
-						<div class="av playhead"></div>
-					</div>
-				</div>
-				<div class="av controller-bar"></div>
-			</div>
-			<video class="av player"></video>
-		</div>
+		<div class="acute-video"></div>
 		
 	</body>
 	

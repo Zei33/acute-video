@@ -33,7 +33,7 @@ var merge = function(){
 
 var controlsTimer;
 
-function acuteVideo( target, options ){
+function acuteVideo( target, options = {} ){
 	
 	options = merge({
 		"width" : "640px",
@@ -54,13 +54,14 @@ function acuteVideo( target, options ){
 		"showSubtitleButton" : false						// Subtitle button : switch between provided subtitle tracks.
 	}, options);
 	
+	target.classList.add("av", "container");
+	target.innerHTML = '<div class="av controller"><div class="av controller-offset"></div><div class="av scrubber"><div class="av playback"><div class="av playhead"></div></div></div><div class="av controller-bar"></div></div><video class="av player"></video>';
+	
 	player = target.querySelector("video.av.player");
 	controls = target.querySelector(".av.controller");
 	controlBar = target.querySelector(".av.controller-bar");
 	controlOffset = target.querySelector(".av.controller-offset");
 	playhead = target.querySelector(".av.playhead");
-	
-	menuButtonCount = 0;
 	
 	player.autoplay = options.autoplay;
 	
@@ -90,6 +91,14 @@ function acuteVideo( target, options ){
 		
 	});
 	
+	target.addEventListener("mouseleave", function(){
+		
+		clearTimeout(controlsTimer);
+		
+		controls.classList.add("hide");
+		
+	});
+	
 	// Add a title and/or subtitle if any is set.
 	if ((options.title + options.subtitle).length > 0){
 		controlOffset.innerHTML = '<div class="av controller-offset-title av-text">' + options.title + '</div><div class="av controller-offset-subtitle av-text">' + options.subtitle + '</div>';
@@ -112,8 +121,7 @@ function acuteVideo( target, options ){
 			pauseButton.style.display = "none";
 			playButton.style.display = "block";
 		});
-		
-		menuButtonCount++;
+
 	}
 	
 	controlBar.querySelectorAll("button.av.av-controller-button").forEach(function(controlButton){
