@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400');
+
+.av.container *
+	{
+	box-sizing:border-box;
+	}
+	
+.av-text
+	{
+	color:white;
+	font-family:'Quicksand', sans-serif;
+	font-weight:400;
+	
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+	}
+
+.av.container
+	{
+	width:640px;
+	height:360px;
+	
+	position:relative;
+	}
+	
+.av.controller-offset
+	{
+	width:100%;
+	height:calc(100% - 51px);
+	
+	background: -moz-linear-gradient(top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0) 100%);
+	background: -webkit-linear-gradient(top, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,0) 100%);
+	background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,0) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#66000000', endColorstr='#00000000',GradientType=0 );
+	}
+	
+.av.controller-offset.hide
+	{
+	opacity:0;
+	}
+	
+.av.controller-offset-title
+	{
+	width:100%;
+	
+	padding:8px 10px 2px 10px;
+		
+	font-size:22px;
+	}
+	
+.av.controller-offset-subtitle
+	{
+	width:100%;
+	
+	padding:2px 10px;
+		
+	font-size:16px;
+	}
+	
+.av.controller
+	{
+	width:100%;
+	height:100%;
+	
+	opacity:1;
+	
+	z-index:5;
+	
+	position:absolute;
+	
+	transition:opacity .33s;
+	}
+	
+.av.controller.hide
+	{
+	opacity:0;
+	}
+
+.av.controller-bar
+	{
+	width:100%;
+	height:38px;
+	
+	padding:8px 10px 10px 10px;
+	}
+	
+.av.scrubber
+	{
+	width:100%;
+	height:4px;
+	
+	padding:0px 10px 5px 10px;
+	}
+	
+.av.playback
+	{
+	width:100%;
+	height:4px;
+	
+	border-radius:2px;
+	
+	background-color:rgba(100,100,100,0.5);
+	}
+	
+.av.playhead
+	{
+	width:50%;
+	height:4px;
+	
+	border-radius:2px;
+	}
+	
+.av.player
+	{
+	width:100%;
+	height:100%;	
+	
+	background-color:black;
+	}
+	
+button.av.av-controller-button
+	{
+	width:22px;
+	height:26px;
+		
+	border:none;
+		
+	background-color:transparent;
+	
+	margin-bottom:-1px;
+	margin-top:0px;
+	padding:3px 5px 3px 5px;
+	
+	outline:0;
+	
+	box-sizing:content-box;
+	
+	cursor:pointer;
+	}
+	
+button.av.av-controller-button.play
+	{
+	padding:3px 5px 3px 5px;
+	}
+	
+button.av.av-controller-button.pause
+	{
+	width:23px;
+	
+	margin-right:-1px;
+		
+	padding:2.5px 5px 3.5px 5px;
+	}
