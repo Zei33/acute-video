@@ -58,3 +58,4 @@ There are many options available with the `acuteVideo()` function to customise t
 - [ ] Improve Browser Compatibility
 - [ ] Implement Mobile Compatibility
 - [ ] Generate Poster Based On Source
+- [ ] Time-View Graph With Playhead
