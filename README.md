@@ -45,7 +45,7 @@ There are many options available with the `acuteVideo()` function to customise t
 ## Priorities
 
 - [X] Play/Pause Button
-- [ ] Fullscreen Toggle Button
+- [X] Fullscreen Toggle Button
 - [X] Scrubber/Playhead
 - [X] Textual Playback Indicator
 - [ ] Volume Controls
