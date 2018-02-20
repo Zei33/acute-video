@@ -230,6 +230,7 @@ function acuteVideo( target, options ){
 		
 		var volumeButton = document.querySelector(target + " .av.volume");
 		var unmuteButton = document.querySelector(target + " .av.unmute");
+		var volumeBarOuter = document.querySelector(target + " .av.volume-bar-outer");
 		var volumeBarInner = document.querySelector(target + " .av.volume-bar-inner");
 		
 		volumeButton.addEventListener("click", function(){
@@ -244,6 +245,14 @@ function acuteVideo( target, options ){
 			volumeButton.style.display = "inline-block";
 			
 			player.muted = false;
+		});
+		
+		volumeBarOuter.addEventListener("click", function(e){
+			
+			fraction = ((e.clientX - volumeBarOuter.getBoundingClientRect().left) / window.getComputedStyle(volumeBarOuter).getPropertyValue("width").slice(0, -2));
+			volumeBarInner.style.width = (100 * fraction) + "%";
+			player.volume = fraction;
+			
 		});
 		
 	}

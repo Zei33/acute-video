@@ -30,7 +30,7 @@
 				"showSubtitleButton" : true
 			});
 			
-			acuteSource(element, "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4");
+			acuteSource(".acute-video", "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4");
 	
 		});
 		
