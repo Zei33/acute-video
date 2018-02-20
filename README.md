@@ -47,7 +47,7 @@ There are many options available with the `acuteVideo()` function to customise t
 - [X] Play/Pause Button
 - [ ] Fullscreen Toggle Button
 - [X] Scrubber/Playhead
-- [ ] Textual Playback Indicator
+- [X] Textual Playback Indicator
 - [ ] Volume Controls
 - [ ] Source Controls
 - [ ] Subtitle Controls (WebVTT)
