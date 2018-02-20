@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	
 });
 
-var merge = function(){
+var merge = function merge(){
     var destination = {},
         sources = [].slice.call( arguments, 0 );
     sources.forEach(function( source ) {
@@ -33,7 +33,7 @@ var merge = function(){
 
 var controlsTimer;
 
-function acuteVideo( target, options = {} ){
+function acuteVideo( target, options ){
 	
 	options = merge({
 		"width" : "640px",
@@ -107,7 +107,8 @@ function acuteVideo( target, options = {} ){
 	}
 	
 	if (options.showPlayButton){
-		controlBar.innerHTML += '<button class="av av-controller-button play"><svg aria-hidden="true" role="img" viewBox="0 0 448 512"><path fill="currentColor" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path></svg></button><button class="av av-controller-button pause" style="display:none;"><svg aria-hidden="true" data-icon="pause" role="img" viewBox="0 0 448 512"><path fill="currentColor" d="M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z"></path></svg></button>';
+		
+		controlBar.innerHTML += '<button class="av av-controller-button play">' + putSVG("play") + '</button><button class="av av-controller-button pause" style="display:none;">' + putSVG("pause") + '</button>';
 	
 		playButton = target.querySelector("button.av.av-controller-button.play");
 		pauseButton = target.querySelector("button.av.av-controller-button.pause");
@@ -122,6 +123,14 @@ function acuteVideo( target, options = {} ){
 			playButton.style.display = "block";
 		});
 
+	}
+	
+	if (options.showFullscreenButton){
+		
+		controlBar.innerHTML += '<button class="av av-controller-button fullscreen">' + putSVG("expand") + '</button><button class="av av-controller-button close-fullscreen">' + putSVG("compress") + '</button>';
+		
+		fullscreenButton = target.querySelector("button.av.av-controller-button.fullscreen");
+		
 	}
 	
 	controlBar.querySelectorAll("button.av.av-controller-button").forEach(function(controlButton){
@@ -141,5 +150,18 @@ function acuteSource( target, source ){
 		// An array of sources.
 		
 	}
+	
+}
+
+function putSVG( type ){
+	
+	dictionary = {
+		expand : 'M0 180V56c0-13.3 10.7-24 24-24h124c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H64v84c0 6.6-5.4 12-12 12H12c-6.6 0-12-5.4-12-12zM288 44v40c0 6.6 5.4 12 12 12h84v84c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12V56c0-13.3-10.7-24-24-24H300c-6.6 0-12 5.4-12 12zm148 276h-40c-6.6 0-12 5.4-12 12v84h-84c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h124c13.3 0 24-10.7 24-24V332c0-6.6-5.4-12-12-12zM160 468v-40c0-6.6-5.4-12-12-12H64v-84c0-6.6-5.4-12-12-12H12c-6.6 0-12 5.4-12 12v124c0 13.3 10.7 24 24 24h124c6.6 0 12-5.4 12-12z',
+		compress : 'M436 192H312c-13.3 0-24-10.7-24-24V44c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v84h84c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm-276-24V44c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v84H12c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h124c13.3 0 24-10.7 24-24zm0 300V344c0-13.3-10.7-24-24-24H12c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h84v84c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-84h84c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12H312c-13.3 0-24 10.7-24 24v124c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12z',
+		play : 'M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z',
+		pause : 'M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z'
+	};
+	
+	return '<svg aria-hidden="true" role="img" viewBox="0 0 448 512"><path fill="currentColor" d="' + dictionary[type] + '"></path></svg>';
 	
 }

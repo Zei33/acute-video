@@ -3,7 +3,7 @@
 <html>
 	
 	<head>
-		<title>acute-video.js</title>
+		<title>acute-video</title>
 		<script src="acute-video.js"></script>
 		<link rel="stylesheet" href="acute-video.css">
 	</head>
