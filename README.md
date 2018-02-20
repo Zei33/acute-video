@@ -7,6 +7,8 @@ This project is still in development and much of the functionality has not yet b
 
 Icons are SVGs from [Font Awesome's Free Audio & Video library](https://fontawesome.com/icons?d=gallery&c=audio-video&m=free).
 
+Check out a live example of acute video [here](https://zeiworld.net/acute-video/)!
+
 ## How To Use
 Add [acute-video.js](https://github.com/Zei33/acute-video/blob/master/acute-video.js) and [acute-video.css](https://github.com/Zei33/acute-video/blob/master/acute-video.css) to the appropriate directories on your server.
 
