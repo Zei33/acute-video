@@ -11,7 +11,6 @@
 	<body>
 		
 		<div class="acute-video"></div>
-		<div class="acute-video2"></div>
 		
 	</body>
 	
