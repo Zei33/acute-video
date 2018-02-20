@@ -44,9 +44,9 @@ There are many options available with the `acuteVideo()` function to customise t
 
 ## Priorities
 
-- [ ] Play/Pause Button
+- [X] Play/Pause Button
 - [ ] Fullscreen Toggle Button
-- [ ] Scrubber/Playhead
+- [X] Scrubber/Playhead
 - [ ] Textual Playback Indicator
 - [ ] Volume Controls
 - [ ] Source Controls
@@ -59,5 +59,6 @@ There are many options available with the `acuteVideo()` function to customise t
 - [ ] Improve Browser Compatibility
 - [ ] Implement Mobile Compatibility
 - [ ] Generate Poster Based On Source
+- [ ] Scrubber Thumbnail Preview
 - [ ] Time-View Graph With Playhead
 - [ ] Support WSS MJPEG Live Feeds
