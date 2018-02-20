@@ -289,7 +289,12 @@ function acuteSource( target, source ){
 	
 	if (typeof source == "string"){
 	
-		document.querySelector(target + " video.av.player").src = source;
+		var player = document.querySelector(target + " video.av.player");
+	
+		player.src = source;
+		setTimeout(function(){
+			player.dispatchEvent((new Event("timeupdate")));
+		},100);
 	
 	}else{
 		
