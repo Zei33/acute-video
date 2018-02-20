@@ -21,18 +21,18 @@
 			element = document.querySelector(".acute-video");
 			
 			acuteVideo(element, {
-				"width" : "630px",
-				"height" : "360px",
-				"autoplay" : true,
+				"width" : "830px",
+				"height" : "467px",
+				"autoplay" : false,
 				"controlFadeTime" : 2000,
-				"title" : "Sample Video",
-				"subtitle" : "3,245 Views",
+				"title" : "Big Buck Bunny",
+				"subtitle" : "Developer Sample Video",
 				"barBlur" : false,
 				"showSourceButton" : true,
 				"showSubtitleButton" : true
 			});
 			
-			acuteSource(element, "http://techslides.com/demos/samples/sample.mp4");
+			acuteSource(element, "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4");
 	
 		});
 		

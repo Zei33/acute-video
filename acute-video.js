@@ -4,6 +4,18 @@ document.addEventListener("DOMContentLoaded", function(){
 	
 });
 
+Number.prototype.toHHMMSS = function () {
+    var sec_num = parseInt(this, 10); // don't forget the second param
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours   < 10) {hours   = "0"+hours;}
+    if (minutes < 10 && hours > 0) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    return (hours == 0 ? "" : hours+':')+minutes+':'+seconds;
+}
+
 var merge = function merge(){
     var destination = {},
         sources = [].slice.call( arguments, 0 );
@@ -32,6 +44,7 @@ var merge = function merge(){
 };
 
 var controlsTimer;
+var playheadUpdate;
 
 function acuteVideo( target, options ){
 	
@@ -55,13 +68,16 @@ function acuteVideo( target, options ){
 	}, options);
 	
 	target.classList.add("av", "container");
-	target.innerHTML = '<div class="av controller"><div class="av controller-offset"></div><div class="av scrubber"><div class="av playback"><div class="av playhead"></div></div></div><div class="av controller-bar"></div></div><video class="av player"></video>';
+	target.innerHTML = '<div class="av controller"><div class="av controller-offset"></div><div class="av scrubber"><div class="av playback"><div class="av playhead"></div></div></div><div class="av controller-bar"><div class="av controller-left"></div><div class="av controller-right"></div></div></div><video class="av player"></video>';
 	
 	player = target.querySelector("video.av.player");
 	controls = target.querySelector(".av.controller");
 	controlBar = target.querySelector(".av.controller-bar");
+	controlsLeft = controlBar.querySelector(".av.controller-left");
+	controlsRight = controlBar.querySelector(".av.controller-right");
 	controlOffset = target.querySelector(".av.controller-offset");
 	playhead = target.querySelector(".av.playhead");
+	playback = target.querySelector(".av.playback");
 	
 	player.autoplay = options.autoplay;
 	
@@ -108,13 +124,19 @@ function acuteVideo( target, options ){
 	
 	if (options.showPlayButton){
 		
-		controlBar.innerHTML += '<button class="av av-controller-button play">' + putSVG("play") + '</button><button class="av av-controller-button pause" style="display:none">' + putSVG("pause") + '</button>';
+		controlsLeft.innerHTML += '<button class="av av-controller-button play">' + putSVG("play") + '</button><button class="av av-controller-button pause" style="display:none">' + putSVG("pause") + '</button></div>';
 
 	}
 	
 	if (options.showFullscreenButton){
 		
-		controlBar.innerHTML += '<button class="av av-controller-button fullscreen">' + putSVG("expand") + '</button><button class="av av-controller-button close-fullscreen" style="display:none">' + putSVG("compress") + '</button>';
+		controlsRight.innerHTML += '<button class="av av-controller-button fullscreen">' + putSVG("expand") + '</button><button class="av av-controller-button close-fullscreen" style="display:none">' + putSVG("compress") + '</button>';
+		
+	}
+	
+	if (options.showPlaybackTime){
+		
+		controlsLeft.innerHTML += '<div class="av playback-time av-text">0:00 / 0:00</div>';
 		
 	}
 	
@@ -124,11 +146,17 @@ function acuteVideo( target, options ){
 		pauseButton = target.querySelector("button.av.av-controller-button.pause");
 		
 		playButton.addEventListener("click", function(){
+			player.play();
+			startPlayhead(player, playhead);
+			
 			playButton.style.display = "none";
 			pauseButton.style.display = "inline-block";
 		});
 		
 		pauseButton.addEventListener("click", function(){
+			player.pause();
+			endPlayhead();
+			
 			pauseButton.style.display = "none";
 			playButton.style.display = "inline-block";
 		});
@@ -156,6 +184,36 @@ function acuteVideo( target, options ){
 		controlButton.style.color = options.controlColor;
 	});
 	
+	player.addEventListener("timeupdate", function(){
+		
+		if (options.showPlaybackTime){
+			
+			playbackTime = controlsLeft.querySelector(".av.playback-time");
+			
+			playbackTime.innerHTML = Math.ceil(player.currentTime).toHHMMSS() + " / " + Math.ceil(player.duration).toHHMMSS();
+			
+		}
+	});
+	
+	playback.addEventListener("click", function(e){
+		
+		endPlayhead();
+		playerPaused = player.paused;
+		player.pause();
+		playhead.style.transition = "width 10ms linear";
+		player.currentTime = player.duration * ((e.clientX - playhead.getBoundingClientRect().left) / window.getComputedStyle(playback).getPropertyValue("width").slice(0, -2));
+		playhead.style.width = 100 * ((e.clientX - playhead.getBoundingClientRect().left) / window.getComputedStyle(playback).getPropertyValue("width").slice(0, -2)) + "%";
+		setTimeout(function(){
+			playhead.style.transition = "width 200ms linear";
+			if (!playerPaused){
+				startPlayhead(player, playhead);
+				player.play();
+			}
+		}, 10);
+		
+		
+	});
+	
 }
 
 function acuteSource( target, source ){
@@ -169,6 +227,24 @@ function acuteSource( target, source ){
 		// An array of sources.
 		
 	}
+	
+}
+
+function startPlayhead( player, playhead ){
+	
+	playheadUpdate = setInterval(function(){
+		
+		percent = 100 / ( player.duration / 0.05 ); // Duration of 1 second produces 20%; Duration of 5 seconds produces 4%
+		
+		playhead.style.width = ((percent * Math.floor(player.currentTime / 0.05))) + "%";
+		
+	}, 50);
+	
+}
+
+function endPlayhead(){
+	
+	clearInterval(playheadUpdate);
 	
 }
 
