@@ -18,9 +18,7 @@
 		
 		document.addEventListener("DOMContentLoaded", function() {
 			
-			element = ".acute-video";
-			
-			acuteVideo(element, {
+			acuteVideo(".acute-video", {
 				"width" : "830px",
 				"height" : "467px",
 				"autoplay" : false,

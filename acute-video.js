@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 Number.prototype.toHHMMSS = function () {
-    var sec_num = parseInt(this, 10); // don't forget the second param
+    var sec_num = parseInt(this, 10); 
     var hours   = Math.floor(sec_num / 3600);
     var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
     var seconds = sec_num - (hours * 3600) - (minutes * 60);
@@ -294,7 +294,7 @@ function acuteSource( target, source ){
 		player.src = source;
 		setTimeout(function(){
 			player.dispatchEvent((new Event("timeupdate")));
-		},100);
+		},1000);
 	
 	}else{
 		
