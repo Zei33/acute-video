@@ -11,6 +11,7 @@
 	<body>
 		
 		<div class="acute-video"></div>
+		<div class="acute-video2"></div>
 		
 	</body>
 	
@@ -18,7 +19,7 @@
 		
 		document.addEventListener("DOMContentLoaded", function() {
 			
-			element = document.querySelector(".acute-video");
+			element = ".acute-video";
 			
 			acuteVideo(element, {
 				"width" : "830px",

@@ -73,6 +73,8 @@
 .av.controller.hide
 	{
 	opacity:0;
+	
+	cursor:none;
 	}
 
 .av.controller-bar
@@ -177,6 +179,11 @@
 	height:100%;	
 	
 	background-color:black;
+	}
+	
+.av.player::-webkit-media-controls-enclosure 
+	{
+	display:none !important;
 	}
 	
 button.av.av-controller-button

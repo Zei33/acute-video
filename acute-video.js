@@ -43,10 +43,10 @@ var merge = function merge(){
     return destination;
 };
 
-var controlsTimer;
-var playheadUpdate;
-
 function acuteVideo( target, options ){
+	
+	var controlsTimer;
+	var playheadUpdate;
 	
 	options = merge({
 		"width" : "640px",
@@ -67,22 +67,23 @@ function acuteVideo( target, options ){
 		"showSubtitleButton" : false						// Subtitle button : switch between provided subtitle tracks.
 	}, options);
 	
-	target.classList.add("av", "container");
-	target.innerHTML = '<div class="av controller"><div class="av controller-offset"></div><div class="av scrubber"><div class="av playback"><div class="av playhead"></div></div></div><div class="av controller-bar"><div class="av controller-left"></div><div class="av controller-right"></div></div></div><video class="av player"></video>';
+	var container = document.querySelector(target);
+	container.classList.add("av", "container");
+	container.innerHTML = '<div class="av controller"><div class="av controller-offset"></div><div class="av scrubber"><div class="av playback"><div class="av playhead"></div></div></div><div class="av controller-bar"><div class="av controller-left"></div><div class="av controller-right"></div></div></div><video class="av player"></video>';
 	
-	player = target.querySelector("video.av.player");
-	controls = target.querySelector(".av.controller");
-	controlBar = target.querySelector(".av.controller-bar");
-	controlsLeft = controlBar.querySelector(".av.controller-left");
-	controlsRight = controlBar.querySelector(".av.controller-right");
-	controlOffset = target.querySelector(".av.controller-offset");
-	playhead = target.querySelector(".av.playhead");
-	playback = target.querySelector(".av.playback");
+	var player = document.querySelector(target + " video.av.player");
+	var controls = document.querySelector(target + " .av.controller");
+	var controlBar = document.querySelector(target + " .av.controller-bar");
+	var controlsLeft = document.querySelector(target + " .av.controller-left");
+	var controlsRight = document.querySelector(target + " .av.controller-right");
+	var controlOffset = document.querySelector(target + " .av.controller-offset");
+	var playhead = document.querySelector(target + " .av.playhead");
+	var playback = document.querySelector(target + " .av.playback");
 	
 	player.autoplay = options.autoplay;
 	
-	target.style.width = options.width;
-	target.style.height = options.height;
+	container.style.width = options.width;
+	container.style.height = options.height;
 	
 	controlBar.style.color = options.controlColor;
 	if (options.barBlur) controlBar.style.setProperty("backdrop-filter", "blur(2px)");
@@ -95,7 +96,7 @@ function acuteVideo( target, options ){
 	}, options.controlFadeTime);
 	
 	// Show the control bar when the mouse moves on over the video element and resets the fade timer.
-	target.addEventListener("mousemove", function(){
+	container.addEventListener("mousemove", function(){
 		
 		controls.classList.remove("hide");
 		
@@ -107,7 +108,7 @@ function acuteVideo( target, options ){
 		
 	});
 	
-	target.addEventListener("mouseleave", function(){
+	container.addEventListener("mouseleave", function(){
 		
 		clearTimeout(controlsTimer);
 		
@@ -142,8 +143,8 @@ function acuteVideo( target, options ){
 	
 	if (options.showPlayButton){
 		
-		playButton = target.querySelector("button.av.av-controller-button.play");
-		pauseButton = target.querySelector("button.av.av-controller-button.pause");
+		var playButton = document.querySelector(target + " button.av.av-controller-button.play");
+		var pauseButton = document.querySelector(target + " button.av.av-controller-button.pause");
 		
 		playButton.addEventListener("click", function(){
 			player.play();
@@ -165,22 +166,61 @@ function acuteVideo( target, options ){
 	
 	if (options.showFullscreenButton){
 		
-		fullscreenButton = target.querySelector("button.av.av-controller-button.fullscreen");
-		closeFullscreenButton = target.querySelector("button.av.av-controller-button.close-fullscreen");
+		var fullscreenButton = document.querySelector(target + " button.av.av-controller-button.fullscreen");
+		var closeFullscreenButton = document.querySelector(target + " button.av.av-controller-button.close-fullscreen");
 		
 		fullscreenButton.addEventListener("click", function(){
 			fullscreenButton.style.display = "none";
 			closeFullscreenButton.style.display = "inline-block";
+			
+			if (player.requestFullscreen) {
+				container.requestFullscreen();
+			} else if (player.webkitRequestFullScreen) {
+				container.webkitRequestFullScreen();
+			} else if (player.mozRequestFullScreen) {
+				container.mozRequestFullScreen();
+			} else if (player.msRequestFullscreen) {
+				container.msRequestFullscreen();
+			}
+			
+			container.style.width = "100%";
+			container.style.height = "100%";
+
 		});
 		
 		closeFullscreenButton.addEventListener("click", function(){
 			closeFullscreenButton.style.display = "none";
 			fullscreenButton.style.display = "inline-block";
+			
+			if (document.exitFullscreen) {
+				document.exitFullscreen();
+			} else if (document.webkitExitFullscreen) {
+				document.webkitExitFullscreen();
+			} else if (player.mozCancelFullScreen) {
+				document.mozCancelFullScreen();
+			} else if (player.msExitFullscreen) {
+				document.msExitFullscreen();
+			}
+			
+			container.style.width = options.width;
+			container.style.height = options.height;
+		});
+		
+		["fullscreenchange", "webkitfullscreenchange", "mozfullscreenchange", "MSFullscreenChange"].forEach(function(event){
+			document.addEventListener(event, function(){
+				if (!document.fullscreenElement && !document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement){
+					closeFullscreenButton.style.display = "none";
+					fullscreenButton.style.display = "inline-block";
+					
+					container.style.width = options.width;
+					container.style.height = options.height;
+				}
+			});
 		});
 		
 	}
 	
-	controlBar.querySelectorAll("button.av.av-controller-button").forEach(function(controlButton){
+	document.querySelectorAll(target + " button.av.av-controller-button").forEach(function(controlButton){
 		controlButton.style.color = options.controlColor;
 	});
 	
@@ -188,7 +228,7 @@ function acuteVideo( target, options ){
 		
 		if (options.showPlaybackTime){
 			
-			playbackTime = controlsLeft.querySelector(".av.playback-time");
+			var playbackTime = document.querySelector(target + " .av.playback-time");
 			
 			playbackTime.innerHTML = Math.ceil(player.currentTime).toHHMMSS() + " / " + Math.ceil(player.duration).toHHMMSS();
 			
@@ -220,7 +260,7 @@ function acuteSource( target, source ){
 	
 	if (typeof source == "string"){
 	
-		target.querySelector("video.av.player").src = source;
+		document.querySelector(target + " video.av.player").src = source;
 	
 	}else{
 		
