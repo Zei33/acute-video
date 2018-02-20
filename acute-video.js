@@ -108,28 +108,47 @@ function acuteVideo( target, options ){
 	
 	if (options.showPlayButton){
 		
-		controlBar.innerHTML += '<button class="av av-controller-button play">' + putSVG("play") + '</button><button class="av av-controller-button pause" style="display:none;">' + putSVG("pause") + '</button>';
-	
-		playButton = target.querySelector("button.av.av-controller-button.play");
-		pauseButton = target.querySelector("button.av.av-controller-button.pause");
-		
-		playButton.addEventListener("click", function(){
-			playButton.style.display = "none";
-			pauseButton.style.display = "block";
-		});
-		
-		pauseButton.addEventListener("click", function(){
-			pauseButton.style.display = "none";
-			playButton.style.display = "block";
-		});
+		controlBar.innerHTML += '<button class="av av-controller-button play">' + putSVG("play") + '</button><button class="av av-controller-button pause" style="display:none">' + putSVG("pause") + '</button>';
 
 	}
 	
 	if (options.showFullscreenButton){
 		
-		controlBar.innerHTML += '<button class="av av-controller-button fullscreen">' + putSVG("expand") + '</button><button class="av av-controller-button close-fullscreen">' + putSVG("compress") + '</button>';
+		controlBar.innerHTML += '<button class="av av-controller-button fullscreen">' + putSVG("expand") + '</button><button class="av av-controller-button close-fullscreen" style="display:none">' + putSVG("compress") + '</button>';
+		
+	}
+	
+	if (options.showPlayButton){
+		
+		playButton = target.querySelector("button.av.av-controller-button.play");
+		pauseButton = target.querySelector("button.av.av-controller-button.pause");
+		
+		playButton.addEventListener("click", function(){
+			playButton.style.display = "none";
+			pauseButton.style.display = "inline-block";
+		});
+		
+		pauseButton.addEventListener("click", function(){
+			pauseButton.style.display = "none";
+			playButton.style.display = "inline-block";
+		});
+		
+	}
+	
+	if (options.showFullscreenButton){
 		
 		fullscreenButton = target.querySelector("button.av.av-controller-button.fullscreen");
+		closeFullscreenButton = target.querySelector("button.av.av-controller-button.close-fullscreen");
+		
+		fullscreenButton.addEventListener("click", function(){
+			fullscreenButton.style.display = "none";
+			closeFullscreenButton.style.display = "inline-block";
+		});
+		
+		closeFullscreenButton.addEventListener("click", function(){
+			closeFullscreenButton.style.display = "none";
+			fullscreenButton.style.display = "inline-block";
+		});
 		
 	}
 	
