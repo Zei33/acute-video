@@ -5,7 +5,7 @@ The goal of acute video is to create a video player that is simple to implement 
 
 This project is still in development and much of the functionality has not yet been implemented. The font is imported into the css file from Google Fonts at the moment, this behaviour will be changed later.
 
-Icons are SVGs from [Font Awesome's Free Audio & Video library](https://fontawesome.com/icons?d=gallery&c=audio-video&m=free).
+Icons are SVGs from [Font Awesome's Free Audio & Video Icon Library](https://fontawesome.com/icons?d=gallery&c=audio-video&m=free).
 
 Check out a live example of acute video [here](https://zeiworld.net/acute-video/)!
 
@@ -27,10 +27,8 @@ To add a source to the video, call `acuteSource(element, source)` after the vide
 ```
 // Wait until the page has finished loading.
 document.addEventListener("DOMContentLoaded", function() {
-	
-	element = document.querySelector(".acute-video");
 
-	acuteVideo(element, {
+	acuteVideo(".acute-video", {
 		"width" : "630px",
 		"height" : "360px"
 	});
@@ -51,6 +49,8 @@ There are many options available with the `acuteVideo()` function to customise t
 - [ ] Volume Controls
 - [ ] Source Controls
 - [ ] Subtitle Controls (WebVTT)
+- [ ] Cleanup Code
+- [ ] Minified and Versioned Code
 
 ## Long Term Objectives
 
