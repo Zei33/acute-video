@@ -31,6 +31,12 @@
 			});
 			
 			acuteSource(".acute-video", "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4");
+			
+			acuteSubtitle(".acute-video", {
+				"kind" : "subtitles",
+				"source" : "subtitle.vtt",
+				"language" : "en"
+			});
 	
 		});
 		

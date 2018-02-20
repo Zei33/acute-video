@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:300,400');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese');
 
 .av.container *
 	{
@@ -307,4 +308,28 @@ button.av.av-controller-button.unmute
 	
 	margin-left:12px;
 	margin-right:4px;
+	}
+	
+.av.player::cue
+	{
+	color:white;
+	font-family: 'Roboto', sans-serif;
+	font-weight:400;
+	font-size:24px;
+	
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+	
+	background:none;
+	}
+	
+.av.player::-webkit-media-text-track-container 
+	{
+	transform: translateY(-60px);
+	
+	transition:transform .33s;
+	}
+	
+.av.player.hidden-controls::-webkit-media-text-track-container
+	{
+	transform: translateY(0px);
 	}

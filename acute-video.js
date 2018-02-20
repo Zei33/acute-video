@@ -93,17 +93,20 @@ function acuteVideo( target, options ){
 	// Set initial control bar fade timer.
 	controlsTimer = setTimeout(function(){
 		controls.classList.add("hide");
+		player.classList.add("hidden-controls");
 	}, options.controlFadeTime);
 	
 	// Show the control bar when the mouse moves on over the video element and resets the fade timer.
 	container.addEventListener("mousemove", function(){
 		
 		controls.classList.remove("hide");
+		player.classList.remove("hidden-controls");
 		
 		clearTimeout(controlsTimer);
 		
 		controlsTimer = setTimeout(function(){
 			controls.classList.add("hide");
+			player.classList.add("hidden-controls");
 		}, options.controlFadeTime);
 		
 	});
@@ -113,6 +116,7 @@ function acuteVideo( target, options ){
 		clearTimeout(controlsTimer);
 		
 		controls.classList.add("hide");
+		player.classList.add("hidden-controls");
 		
 	});
 	
@@ -296,18 +300,32 @@ function acuteVideo( target, options ){
 
 function acuteSource( target, source ){
 	
-	if (typeof source == "string"){
+	var player = document.querySelector(target + " video.av.player");
 	
-		var player = document.querySelector(target + " video.av.player");
+	if (Array.isArray(source)){
+		
+	}else{
 	
 		player.src = source;
 		setTimeout(function(){
 			player.dispatchEvent((new Event("timeupdate")));
 		},1000);
 	
+	}
+	
+}
+
+function acuteSubtitle( target, source ){
+	
+	var player = document.querySelector(target + " video.av.player");
+	
+	if (Array.isArray(source)){
+		
 	}else{
 		
-		// An array of sources.
+		player.innerHTML += '<track kind="' + source.kind + '" src="' + source.source + '" srclang="' + source.language + '" default>';
+		console.log(player.textTracks[0]);
+		player.textTracks[0].mode = "showing";
 		
 	}
 	
