@@ -32,6 +32,8 @@
 	background: -webkit-linear-gradient(top, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,0) 100%);
 	background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,0) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#66000000', endColorstr='#00000000',GradientType=0 );
+	
+	position:relative;
 	}
 	
 .av.controller-offset.hide
@@ -310,6 +312,18 @@ button.av.av-controller-button.unmute
 	margin-right:4px;
 	}
 	
+button.av.av-controller-button.subtitle
+	{
+	width:29px;
+	height:29px;
+	
+	padding:0px 3px 2px 3px;
+	
+	margin-top:-1px;
+	
+	margin-right:14px;
+	}
+	
 .av.player::cue
 	{
 	color:white;
@@ -332,4 +346,67 @@ button.av.av-controller-button.unmute
 .av.player.hidden-controls::-webkit-media-text-track-container
 	{
 	transform: translateY(0px);
+	}
+	
+.av.subtitle-list
+	{
+	right:10px;
+	bottom:5px;
+		
+	background-color:rgba(50,50,50,0.5);
+	
+	opacity:0;
+	
+	border-radius:2px;
+	
+	padding:2px;
+	
+	display:block;
+	
+	position:absolute;
+	
+	transition:opacity 300ms;
+	}
+	
+
+.av.subtitle-list.show
+	{
+	opacity:1;
+	}
+	
+.av.subtitle-list-button
+	{
+	width:120px;
+	height:20px;
+	
+	background-color:transparent;
+	
+	border:none;
+	border-bottom:1px solid rgba(255,255,255,0.25);
+	
+	border-radius:0px;
+	
+	outline:0;
+	
+	cursor:pointer;
+	
+	display:block;
+	}
+	
+.av.subtitle-list-button:hover
+	{
+	background-color:rgba(255,255,255,0.15);
+	}
+	
+.av.subtitle-list-button:first-child
+	{
+	border-top-left-radius:2px;
+	border-top-right-radius:2px;
+	}
+	
+.av.subtitle-list-button:last-child
+	{
+	border-bottom:none;
+	border-bottom-left-radius:2px;
+	border-bottom-right-radius:2px;
 	}
