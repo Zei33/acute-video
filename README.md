@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		"height" : "360px"
 	});
 
-	acuteSource(element, "http://techslides.com/demos/samples/sample.mp4");
+	acuteSource(".acute-video", "http://techslides.com/demos/samples/sample.mp4");
 
 });
 ```
@@ -63,3 +63,4 @@ There are many options available with the `acuteVideo()` function to customise t
 - [ ] Scrubber Thumbnail Preview
 - [ ] Time-View Graph With Playhead
 - [ ] Support WSS MJPEG Live Feeds
+- [ ] Implement Analytics API
