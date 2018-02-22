@@ -234,7 +234,7 @@
 	
 .av.volume-bar-inner
 	{
-	width:50%;
+	width:100%;
 	height:6px;
 	
 	background-color:rgba(200,200,200,0.75);
