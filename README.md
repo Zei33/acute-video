@@ -10,10 +10,11 @@ Icons are SVGs from [Font Awesome's Free Audio & Video Icon Library](https://fon
 Check out a live example of acute video [here](https://zeiworld.net/acute-video/)!
 
 ## How To Use
-Add [acute-video.js](https://github.com/Zei33/acute-video/blob/master/acute-video.js) and [acute-video.css](https://github.com/Zei33/acute-video/blob/master/acute-video.css) to the appropriate directories on your server.
+Add [acute-video.js](https://github.com/Zei33/acute-video/blob/master/acute-video.js), [acute-icons.js](https://github.com/Zei33/acute-video/blob/master/acute-icons.js) and [acute-video.css](https://github.com/Zei33/acute-video/blob/master/acute-video.css) to the appropriate directories on your server.
 
-Import the two files into your website's head. Ensure that you reference the correct file locations.
+Import the three files into your website's head. Ensure that you reference the correct file locations.
 ```
+<script src="acute-icons.js"></script>
 <script src="acute-video.js"></script>
 <link rel="stylesheet" href="acute-video.css">
 ```
@@ -48,7 +49,7 @@ There are many options available with the `acuteVideo()` function to customise t
 - [X] Textual Playback Indicator
 - [X] Volume Controls
 - [ ] Source Controls
-- [ ] Subtitle Controls (WebVTT)
+- [X] Subtitle Controls (WebVTT)
 - [ ] Cleanup Code
 - [ ] Minified and Versioned Code
 
